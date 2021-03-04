@@ -43,7 +43,7 @@ namespace PC_STORE
                 PdfWriter writer = PdfWriter.GetInstance(Doc, fs);
                 Doc.Open();
                 Doc.NewPage();
-                string ARIALUNI_TFF = Path.Combine(@"C:\Users\Haimv\Desktop\PC STORE", "ARIAL.TTF");
+                string ARIALUNI_TFF = Path.Combine(@"C:\arial.tff location here", "ARIAL.TTF");
                 BaseFont bf = BaseFont.CreateFont(ARIALUNI_TFF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
                 Font f = new Font(bf, 8);
                 PdfPTable T = new PdfPTable(1);
@@ -52,7 +52,7 @@ namespace PC_STORE
 
                 //----------------------------------------------------------------------
                 //הוספת תמונה
-                Image image = Image.GetInstance("C:\\Users\\Haimv\\Desktop\\PC STORE\\Design\\Logo\\logo_transparent.png");
+                Image image = Image.GetInstance("C:\\Logo location here\\logo_transparent.png");
                 image.ScaleAbsolute(100, 100);
                 image.Alignment = Element.ALIGN_CENTER;
                 Doc.Add(image);
