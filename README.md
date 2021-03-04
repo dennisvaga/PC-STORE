@@ -1,5 +1,5 @@
 # PC-Store-Project
-ALL THE FILES YOU NEED IS LOCATED AT DB+arial.ttf!
+ALL THE FILES LOCATED AT DB+arial.ttf
 
 1. Download the project
 2. Add the DB to your SQL Server Managment (Databases--> Attach)
