@@ -51,13 +51,13 @@ namespace PC_STORE
             {
                 Document Doc = new Document(PageSize.A4, 25, 25, 30, 30);
 
-                using (FileStream fs = new FileStream(@"C:\Users\Haimv\Desktop\" + "עובד "
+                using (FileStream fs = new FileStream(@"C:\" + "עובד "
                     + DGV_SHIFTS.Rows[0].Cells[0].Value + ".pdf", FileMode.Create, FileAccess.Write, FileShare.Read))
                 {
                     PdfWriter writer = PdfWriter.GetInstance(Doc, fs);
                     Doc.Open();
                     Doc.NewPage();
-                    string ARIALUNI_TFF = Path.Combine(@"C:\Users\Haimv\Desktop\PC STORE", "ARIAL.TTF");
+                    string ARIALUNI_TFF = Path.Combine(@"C:\", "ARIAL.TTF");
                     BaseFont bf = BaseFont.CreateFont(ARIALUNI_TFF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
                     Font f1 = new Font(bf, 8);
                     PdfPTable Table = new PdfPTable(3);
@@ -69,7 +69,7 @@ namespace PC_STORE
 
                     //-------------------------------------------------------------------------
                     //הוספת תמונה
-                    Image image = Image.GetInstance("C:\\Users\\Haimv\\Desktop\\PC STORE\\Design\\Logo\\logo_transparent.png");
+                    Image image = Image.GetInstance("C:\\Logo Folder here\\logo_transparent.png");
                     image.ScaleAbsolute(100, 100);
                     image.Alignment = Element.ALIGN_CENTER;
                     Doc.Add(image);
