@@ -6,70 +6,78 @@ namespace PC_STORE
 {
     public partial class FORM_CUSTOMER_ORDERS : Form
     {
-        private Order order = new Order();
         public FORM_CUSTOMER_ORDERS()
         {
             InitializeComponent();
 
         }
-        //Populate listbox with the product name in the slected order
+        
+        private void CheckGntee()//בדיקת אחריות
+        {
+            for (int i = 0; i < DGV_CUSTOMER_DETAILS.Rows.Count; i++)
+            {
+                DateTime OrderDate = Convert.ToDateTime(DGV_CUSTOMER_DETAILS.Rows[i].Cells[6].Value);//תאריך קנייה
+                DateTime GnteeEnd = OrderDate.AddMonths(Convert.ToInt32(DGV_CUSTOMER_DETAILS.Rows[i].Cells[5].Value));//מוסיפים את החודשים של האחריות
+                DateTime today = DateTime.Now;
+
+                long diffTicks = (GnteeEnd - today).Ticks;
+                if (diffTicks > 0)
+                    DGV_CUSTOMER_DETAILS.Rows[i].Cells[7].Value = "כן";
+                else
+                    DGV_CUSTOMER_DETAILS.Rows[i].Cells[7].Value = "לא";
+
+            }
+        }
+        private void LoadHeaders()//משנה כותרות
+        {
+            DGV_CUSTOMER_DETAILS.AutoGenerateColumns = false;
+            DGV_CUSTOMER_DETAILS.Columns[0].HeaderText = "קוד מוצר";
+            DGV_CUSTOMER_DETAILS.Columns[1].HeaderText = "שם המוצר";
+            DGV_CUSTOMER_DETAILS.Columns[2].HeaderText = "כמות";
+            DGV_CUSTOMER_DETAILS.Columns[3].HeaderText = "מחיר המוצר";
+            DGV_CUSTOMER_DETAILS.Columns[4].HeaderText = "סה\"כ מחיר";
+            DGV_CUSTOMER_DETAILS.Columns[5].Visible = false;
+            DGV_CUSTOMER_DETAILS.Columns[6].Visible = false;
+            DataGridViewTextBoxColumn dgvGntee = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "באחריות"
+            };
+            DGV_CUSTOMER_DETAILS.Columns.Add(dgvGntee);
+            DGV_CUSTOMER_DETAILS.Columns[7].HeaderText = "באחריות";
+        }
+
         private void FORM_CUSTOMER_ORDERS_Load(object sender, EventArgs e)
         {
-            //Show customer oreders
-            if (DGV_CUSTOMER_ORDERS.Rows.Count - 1 != 0)
+            Order order = new Order();
+            DGV_CUSTOMER_ORDERS.Columns[0].HeaderText = "מ'ס הזמנה";
+            DGV_CUSTOMER_ORDERS.Columns[1].HeaderText = "תאריך הזמנה";
+
+            //מראה את ההזמנות של הלקוח
+            if (DGV_CUSTOMER_ORDERS.Rows.Count != 0)
             {
-                int orderId = Convert.ToInt32(DGV_CUSTOMER_ORDERS.CurrentRow.Cells[0].Value.ToString());
-                // get the order details
+                int orderId = Convert.ToInt32(DGV_CUSTOMER_ORDERS.CurrentRow.Cells[0].Value);
                 DataTable details = order.GetOrderDetails(orderId);
+                DGV_CUSTOMER_DETAILS.DataSource = details;
+
                 if (details.Rows.Count != 0)
                 {
-                    // show the products in the listbox
-                    LSB_CUSTOMER_ORDER_PRODUCTS.DataSource = order.GetOrderDetails(orderId);
-                    LSB_CUSTOMER_ORDER_PRODUCTS.DisplayMember = "PRO_NAME";
-                }
-                else
-                {
-                    LSB_CUSTOMER_ORDER_PRODUCTS.DataSource = null;
-                    LSB_CUSTOMER_ORDER_PRODUCTS.Items.Add("No Products");
+                    LoadHeaders();
+                    CheckGntee();
                 }
             }
+        }   
 
-        }
-
-        // repopulate listbox with the product name in the slected order
-        private void DGV_CUSTOMER_ORDERS_DoubleClick(object sender, EventArgs e)
-        {
-            int orderId = Convert.ToInt32(DGV_CUSTOMER_ORDERS.CurrentRow.Cells[0].Value.ToString());
-            DataTable details = order.GetOrderDetails(orderId);
-            if (details.Rows.Count != 0)
-            {
-                LSB_CUSTOMER_ORDER_PRODUCTS.DataSource = order.GetOrderDetails(orderId);
-                LSB_CUSTOMER_ORDER_PRODUCTS.DisplayMember = "PRO_NAME";
-            }
-            else
-            {
-                LSB_CUSTOMER_ORDER_PRODUCTS.DataSource = null;
-                LSB_CUSTOMER_ORDER_PRODUCTS.Items.Add("No Products");
-            }
-        }
-
-        // show products in the selected order 
+        //מראה את המוצרים של הלקוח הנבחר
         private void DGV_CUSTOMER_ORDERS_Click(object sender, EventArgs e)
         {
-            int orderId = Convert.ToInt32(DGV_CUSTOMER_ORDERS.CurrentRow.Cells[0].Value.ToString());
+            Order order = new Order();
+            int orderId = Convert.ToInt32(DGV_CUSTOMER_ORDERS.CurrentRow.Cells[0].Value);
             DataTable details = order.GetOrderDetails(orderId);
             if (details.Rows.Count != 0)
             {
-                LSB_CUSTOMER_ORDER_PRODUCTS.DataSource = order.GetOrderDetails(orderId);
-                LSB_CUSTOMER_ORDER_PRODUCTS.DisplayMember = "PRO_NAME";
-            }
-            else
-            {
-                LSB_CUSTOMER_ORDER_PRODUCTS.DataSource = null;
-                LSB_CUSTOMER_ORDER_PRODUCTS.Items.Add("No Products");
+                DGV_CUSTOMER_DETAILS.DataSource = details;
+                CheckGntee();
             }
         }
-
-
     }
 }

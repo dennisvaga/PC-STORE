@@ -5,150 +5,119 @@ namespace PC_STORE
 {
     class Product
     {
-        DB db = new DB();
-        public void InsertProduct(int cid, string name, string price, byte[] image, int quantity, string desc)
+        public void InsertProduct(int cid, string name, float price, byte[] image, int quantity, string desc, int gntee)//להכניס מוצר
         {
-
             DB db = new DB();
-            db.openConnection();
-            SqlParameter[] parameters = new SqlParameter[6];
-
-            parameters[0] = new SqlParameter("@c_id", SqlDbType.Int)
+            db.OpenConnection();
+            SqlParameter[] parameters =
             {
-                Value = cid
+                new SqlParameter("@c_id", SqlDbType.Int),
+                new SqlParameter("@p_name", SqlDbType.VarChar, 50),
+                new SqlParameter("@s_qty", SqlDbType.Int),
+                new SqlParameter("@price", SqlDbType.Float),
+                new SqlParameter("@desc", SqlDbType.VarChar),
+                new SqlParameter("@img", SqlDbType.Image),
+                new SqlParameter("@gntee", SqlDbType.Int)
             };
+            parameters[0].Value = cid;
+            parameters[1].Value = name;
+            parameters[2].Value = price;
+            parameters[3].Value = image;
+            parameters[4].Value = quantity;
+            parameters[5].Value = desc;
+            parameters[6].Value = gntee;
 
-            parameters[1] = new SqlParameter("@p_name", SqlDbType.VarChar, 50)
-            {
-                Value = name
-            };
-
-            parameters[2] = new SqlParameter("@s_qty", SqlDbType.Int)
-            {
-                Value = quantity
-            };
-
-            parameters[3] = new SqlParameter("@price", SqlDbType.VarChar, 50)
-            {
-                Value = price
-            };
-
-            parameters[4] = new SqlParameter("@desc", SqlDbType.VarChar)
-            {
-                Value = desc
-            };
-
-            parameters[5] = new SqlParameter("@img", SqlDbType.Image)
-            {
-                Value = image
-            };
-
-            db.setData("spr_insert_product", parameters);
-            db.closeConnection();
-
+            db.SetData("spr_insert_product", parameters);
+            db.CloseConnection();
         }
 
-        public DataTable GetProducts()
+        public void UpdateProduct(int pid, int cid, string name, string price, byte[] image, int quantity, string desc)//עידכון מוצר
         {
-            DataTable tab = db.getData("spr_get_Products", null);
-            db.closeConnection();
+            DB db = new DB();
+            db.OpenConnection();
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@pid", SqlDbType.Int),
+                new SqlParameter("@c_id", SqlDbType.Int),
+                new SqlParameter("@p_name", SqlDbType.VarChar, 50),
+                new SqlParameter("@s_qty", SqlDbType.Int),
+                new SqlParameter("@price", SqlDbType.VarChar, 50),
+                new SqlParameter("@desc", SqlDbType.VarChar),
+                new SqlParameter("@img", SqlDbType.Image)
+            };
+            parameters[0].Value = pid;
+            parameters[1].Value = cid;
+            parameters[2].Value = name;
+            parameters[3].Value = price;
+            parameters[4].Value = image;
+            parameters[5].Value = quantity;
+            parameters[6].Value = desc;
+
+            db.SetData("spr_update_product", parameters);
+            db.CloseConnection();
+        }
+        public DataTable GetProducts()//משיכת מוצרים
+        {
+            DB db = new DB();
+            DataTable tab = db.GetData("spr_get_products", null);
+            db.CloseConnection();
             return tab;
         }
 
-        public DataTable GetProduct(int id)
+        public DataTable GetProduct(int id)//משיכת מוצר 
         {
+            DB db = new DB();
             SqlParameter[] parameters = new SqlParameter[1];
             parameters[0] = new SqlParameter("@id", SqlDbType.Int)
             {
                 Value = id
             };
-            DataTable tab = db.getData("spr_get_Product_by_id", parameters);
-            db.closeConnection();
+            DataTable tab = db.GetData("spr_get_product_by_id", parameters);
+            db.CloseConnection();
             return tab;
         }
 
-        public DataTable GetProductsByCategory(int cat_id)
+        public DataTable GetProductsByCategory(int cat_id)//קבלת מוצרים פר קטגוריה
         {
+            DB db = new DB();
             SqlParameter[] parameters = new SqlParameter[1];
             parameters[0] = new SqlParameter("@cid", SqlDbType.Int)
             {
                 Value = cat_id
             };
-            DataTable table = db.getData("spr_products_by_category", parameters);
-            db.closeConnection();
+            DataTable table = db.GetData("spr_products_by_category", parameters);
+            db.CloseConnection();
             return table;
         }
 
 
-        public DataTable SearchProducts(string valueToSearch)
+        public DataTable SearchProducts(string valueToSearch)//חיפוש מוצרים
         {
+            DB db = new DB();
             SqlParameter[] parameters = new SqlParameter[1];
             parameters[0] = new SqlParameter("@val", SqlDbType.VarChar, 100)
             {
                 Value = valueToSearch
             };
-            DataTable table = db.getData("spr_search_Products", parameters);
-            db.closeConnection();
+            DataTable table = db.GetData("spr_search_products", parameters);
+            db.CloseConnection();
             return table;
         }
 
-        public void DeleteProducts(int product_id)
+        public void DeleteProducts(int product_id)//מחיקת מוצרים
         {
+            DB db = new DB();
             SqlParameter[] parameters = new SqlParameter[1];
 
             parameters[0] = new SqlParameter("@pid", SqlDbType.Int)
             {
                 Value = product_id
             };
-
-            db.openConnection();
-            db.setData("spr_delete_Products", parameters);
-            db.closeConnection();
+            db.OpenConnection();
+            db.SetData("spr_delete_products", parameters);
+            db.CloseConnection();
         }
 
-        public void UpdateProduct(int pid, int cid, string name, string price, byte[] image, int quantity, string desc)
-        {
-            db.openConnection();
-            SqlParameter[] parameters = new SqlParameter[7];
 
-            parameters[0] = new SqlParameter("@pid", SqlDbType.Int)
-            {
-                Value = pid
-            };
-
-            parameters[1] = new SqlParameter("@c_id", SqlDbType.Int)
-            {
-                Value = cid
-            };
-
-            parameters[2] = new SqlParameter("@p_name", SqlDbType.VarChar, 50)
-            {
-                Value = name
-            };
-
-            parameters[3] = new SqlParameter("@s_qty", SqlDbType.Int)
-            {
-                Value = quantity
-            };
-
-            parameters[4] = new SqlParameter("@price", SqlDbType.VarChar, 50)
-            {
-                Value = price
-            };
-
-            parameters[5] = new SqlParameter("@desc", SqlDbType.VarChar)
-            {
-                Value = desc
-            };
-
-            parameters[6] = new SqlParameter("@img", SqlDbType.Image)
-            {
-                Value = image
-            };
-
-            db.setData("spr_update_Product", parameters);
-            db.closeConnection();
-
-        }
     }
 }

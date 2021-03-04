@@ -4,20 +4,19 @@ namespace PC_STORE
 {
     class Login
     {
-        public DataTable login(string username, string password)
+        public DataTable login(string username, string password)//כניסה למערכת
         {
             DB db = new DB();
-            SqlParameter[] param = new SqlParameter[2];
-            param[0] = new SqlParameter("@username", SqlDbType.VarChar, 20)
+            SqlParameter[] parameters =
             {
-                Value = username
+                new SqlParameter("@username", SqlDbType.VarChar, 20),
+                new SqlParameter("@pass", SqlDbType.VarChar, 20)
             };
-            param[1] = new SqlParameter("@pass", SqlDbType.VarChar, 20)
-            {
-                Value = password
-            };
-            DataTable tab = db.getData("spr_login", param);
-            db.closeConnection();
+            parameters[0].Value = username;
+            parameters[1].Value = password;
+
+            DataTable tab = db.GetData("spr_login", parameters);
+            db.CloseConnection();
             return tab;
         }
     }

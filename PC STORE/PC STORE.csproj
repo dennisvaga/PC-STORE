@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -48,11 +48,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="CheckClass.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="FORM_ADD_NEW_CATEGORY.cs">
@@ -73,11 +81,11 @@
     <Compile Include="FORM_ADD_NEW_CATEGORY.Designer.cs">
       <DependentUpon>FORM_ADD_NEW_CATEGORY.cs</DependentUpon>
     </Compile>
-    <Compile Include="FORM_ALL_ORDERS.cs">
+    <Compile Include="FORM_HOME_PAGE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FORM_ALL_ORDERS.Designer.cs">
-      <DependentUpon>FORM_ALL_ORDERS.cs</DependentUpon>
+    <Compile Include="FORM_HOME_PAGE.Designer.cs">
+      <DependentUpon>FORM_HOME_PAGE.cs</DependentUpon>
     </Compile>
     <Compile Include="FORM_CUSTOMER_ORDERS.cs">
       <SubType>Form</SubType>
@@ -85,47 +93,11 @@
     <Compile Include="FORM_CUSTOMER_ORDERS.Designer.cs">
       <DependentUpon>FORM_CUSTOMER_ORDERS.cs</DependentUpon>
     </Compile>
-    <Compile Include="FORM_HOME.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM_HOME.Designer.cs">
-      <DependentUpon>FORM_HOME.cs</DependentUpon>
-    </Compile>
     <Compile Include="FORM_LOGIN.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FORM_LOGIN.Designer.cs">
       <DependentUpon>FORM_LOGIN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FORM_MANAGE_CATEGORIES.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM_MANAGE_CATEGORIES.Designer.cs">
-      <DependentUpon>FORM_MANAGE_CATEGORIES.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FORM_MANAGE_CUSTOMER.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM_MANAGE_CUSTOMER.Designer.cs">
-      <DependentUpon>FORM_MANAGE_CUSTOMER.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FORM_MANAGE_ORDER.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM_MANAGE_ORDER.Designer.cs">
-      <DependentUpon>FORM_MANAGE_ORDER.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FORM_MANAGE_PRODUCT.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM_MANAGE_PRODUCT.Designer.cs">
-      <DependentUpon>FORM_MANAGE_PRODUCT.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FORM_MANAGE_USER.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM_MANAGE_USER.Designer.cs">
-      <DependentUpon>FORM_MANAGE_USER.cs</DependentUpon>
     </Compile>
     <Compile Include="FORM_NEW_CUSTOMER.cs">
       <SubType>Form</SubType>
@@ -139,17 +111,11 @@
     <Compile Include="FORM_NEW_PRODUCT.Designer.cs">
       <DependentUpon>FORM_NEW_PRODUCT.cs</DependentUpon>
     </Compile>
-    <Compile Include="FORM_NEW_USER.cs">
+    <Compile Include="FORM_NEW_EMPLOYEE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FORM_NEW_USER.Designer.cs">
-      <DependentUpon>FORM_NEW_USER.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FORM_PRODUCTS_IN_CATEGORIES.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM_PRODUCTS_IN_CATEGORIES.Designer.cs">
-      <DependentUpon>FORM_PRODUCTS_IN_CATEGORIES.cs</DependentUpon>
+    <Compile Include="FORM_NEW_EMPLOYEE.Designer.cs">
+      <DependentUpon>FORM_NEW_EMPLOYEE.cs</DependentUpon>
     </Compile>
     <Compile Include="FORM_QUANTITY.cs">
       <SubType>Form</SubType>
@@ -157,47 +123,71 @@
     <Compile Include="FORM_QUANTITY.Designer.cs">
       <DependentUpon>FORM_QUANTITY.cs</DependentUpon>
     </Compile>
-    <Compile Include="FORM_UPDATE_PRODUCT.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM_UPDATE_PRODUCT.Designer.cs">
-      <DependentUpon>FORM_UPDATE_PRODUCT.cs</DependentUpon>
-    </Compile>
     <Compile Include="Login.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Employees.cs" />
+    <Compile Include="UC_ALL_ORDERS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_ALL_ORDERS.Designer.cs">
+      <DependentUpon>UC_ALL_ORDERS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_EMPLOYEE_SHIFTS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_EMPLOYEE_SHIFTS.Designer.cs">
+      <DependentUpon>UC_EMPLOYEE_SHIFTS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_INCOME.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_INCOME.Designer.cs">
+      <DependentUpon>UC_INCOME.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_MANAGE_CATEGORIES.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_MANAGE_CATEGORIES.Designer.cs">
+      <DependentUpon>UC_MANAGE_CATEGORIES.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_MANAGE_CUSTOMERS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_MANAGE_CUSTOMERS.Designer.cs">
+      <DependentUpon>UC_MANAGE_CUSTOMERS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_MANAGE_EMPLOYEE.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_MANAGE_EMPLOYEE.Designer.cs">
+      <DependentUpon>UC_MANAGE_EMPLOYEE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_MANAGE_ORDER.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_MANAGE_ORDER.Designer.cs">
+      <DependentUpon>UC_MANAGE_ORDER.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_MANAGE_PRODUCT.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_MANAGE_PRODUCT.Designer.cs">
+      <DependentUpon>UC_MANAGE_PRODUCT.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FORM_ADD_NEW_CATEGORY.resx">
       <DependentUpon>FORM_ADD_NEW_CATEGORY.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FORM_ALL_ORDERS.resx">
-      <DependentUpon>FORM_ALL_ORDERS.cs</DependentUpon>
+    <EmbeddedResource Include="FORM_HOME_PAGE.resx">
+      <DependentUpon>FORM_HOME_PAGE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FORM_CUSTOMER_ORDERS.resx">
       <DependentUpon>FORM_CUSTOMER_ORDERS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FORM_HOME.resx">
-      <DependentUpon>FORM_HOME.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FORM_LOGIN.resx">
       <DependentUpon>FORM_LOGIN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FORM_MANAGE_CATEGORIES.resx">
-      <DependentUpon>FORM_MANAGE_CATEGORIES.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FORM_MANAGE_CUSTOMER.resx">
-      <DependentUpon>FORM_MANAGE_CUSTOMER.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FORM_MANAGE_ORDER.resx">
-      <DependentUpon>FORM_MANAGE_ORDER.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FORM_MANAGE_PRODUCT.resx">
-      <DependentUpon>FORM_MANAGE_PRODUCT.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FORM_MANAGE_USER.resx">
-      <DependentUpon>FORM_MANAGE_USER.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FORM_NEW_CUSTOMER.resx">
       <DependentUpon>FORM_NEW_CUSTOMER.cs</DependentUpon>
@@ -205,17 +195,11 @@
     <EmbeddedResource Include="FORM_NEW_PRODUCT.resx">
       <DependentUpon>FORM_NEW_PRODUCT.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FORM_NEW_USER.resx">
-      <DependentUpon>FORM_NEW_USER.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FORM_PRODUCTS_IN_CATEGORIES.resx">
-      <DependentUpon>FORM_PRODUCTS_IN_CATEGORIES.cs</DependentUpon>
+    <EmbeddedResource Include="FORM_NEW_EMPLOYEE.resx">
+      <DependentUpon>FORM_NEW_EMPLOYEE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FORM_QUANTITY.resx">
       <DependentUpon>FORM_QUANTITY.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FORM_UPDATE_PRODUCT.resx">
-      <DependentUpon>FORM_UPDATE_PRODUCT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -225,7 +209,32 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UC_ALL_ORDERS.resx">
+      <DependentUpon>UC_ALL_ORDERS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_EMPLOYEE_SHIFTS.resx">
+      <DependentUpon>UC_EMPLOYEE_SHIFTS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_INCOME.resx">
+      <DependentUpon>UC_INCOME.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_MANAGE_CATEGORIES.resx">
+      <DependentUpon>UC_MANAGE_CATEGORIES.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_MANAGE_CUSTOMERS.resx">
+      <DependentUpon>UC_MANAGE_CUSTOMERS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_MANAGE_EMPLOYEE.resx">
+      <DependentUpon>UC_MANAGE_EMPLOYEE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_MANAGE_ORDER.resx">
+      <DependentUpon>UC_MANAGE_ORDER.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_MANAGE_PRODUCT.resx">
+      <DependentUpon>UC_MANAGE_PRODUCT.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -254,6 +263,96 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\facebook_cover_photo_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\categorize_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_group_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\create_order_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\create_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product_40px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export_80px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coworking_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\future_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\todo_list_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_transparent1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\linkedin_profile_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\twitter_header_photo_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send_to_printer_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_30px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send_to_printer_40px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_transparent2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_transparent3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money_40px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,114 +5,95 @@ namespace PC_STORE
 {
     class Customer
     {
-
-        public void InsertCustomer(string fname, string lname, string tel, string email)
+        public void InsertCustomer(int id, string fname, string lname, string tel, string email)//הכנסת לקוח
         {
-
             DB db = new DB();
-            db.openConnection();
-            SqlParameter[] parameters = new SqlParameter[4];
-
-            parameters[0] = new SqlParameter("@fname", SqlDbType.VarChar)
+            db.OpenConnection();
+            SqlParameter[] parameters =
             {
-                Value = fname
+                new SqlParameter("@id", SqlDbType.VarChar),
+                new SqlParameter("@fname", SqlDbType.VarChar),
+                new SqlParameter("@lname", SqlDbType.VarChar, 50),
+                new SqlParameter("@tel", SqlDbType.NChar, 20),
+                new SqlParameter("@mail", SqlDbType.VarChar, 50)
             };
+            parameters[0].Value = id;
+            parameters[1].Value = fname;
+            parameters[2].Value = lname;
+            parameters[3].Value = tel;
+            parameters[4].Value = email;
 
-            parameters[1] = new SqlParameter("@lname", SqlDbType.VarChar, 50)
-            {
-                Value = lname
-            };
-
-            parameters[2] = new SqlParameter("@tel", SqlDbType.NChar, 20)
-            {
-                Value = tel
-            };
-
-            parameters[3] = new SqlParameter("@mail", SqlDbType.VarChar, 50)
-            {
-                Value = email
-            };
-
-            db.setData("spr_insert_customer", parameters);
-            db.closeConnection();
-
+            db.SetData("spr_insert_customer", parameters);
+            db.CloseConnection();
         }
-
-        public DataTable GetCustomers()
+        public void UpdateCustomer(int id, string fname, string lname, string tel, string email)//עידכון לקוח
         {
             DB db = new DB();
-            DataTable tab = db.getData("spr_get_customers", null);
-            db.closeConnection();
+            db.OpenConnection();
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@id", SqlDbType.Int),
+                new SqlParameter("@fname", SqlDbType.VarChar, 50),
+                new SqlParameter("@lname", SqlDbType.VarChar, 50),
+                new SqlParameter("@tel", SqlDbType.NChar, 20),
+                new SqlParameter("@mail", SqlDbType.VarChar, 50)
+            };
+            parameters[0].Value = id;
+            parameters[1].Value = fname;
+            parameters[2].Value = lname;
+            parameters[3].Value = tel;
+            parameters[4].Value = email;
+
+            db.SetData("spr_update_customer", parameters);
+            db.CloseConnection();
+        }
+        public DataTable GetCustomers()//למשוך לקוחות
+        {
+            DB db = new DB();
+            DataTable tab = db.GetData("spr_get_customers", null);
+            db.CloseConnection();
             return tab;
         }
 
-
-        public DataTable SearchProducts(string valueToSearch)
+        public void DeleteCustomer(int id)//מחיקת לקוח
         {
+            DB db = new DB();
+            SqlParameter[] parameters = new SqlParameter[1];
+            parameters[0] = new SqlParameter("@id", SqlDbType.Int)
+            {
+                Value = id
+            };
+            db.OpenConnection();
+            db.SetData("spr_delete_customer", parameters);
+            db.CloseConnection();
 
+        }
+       
+        public DataTable SearchCustomers(string valueToSearch)//חיפוש לקוח
+        {
             DB db = new DB();
             SqlParameter[] parameters = new SqlParameter[1];
             parameters[0] = new SqlParameter("@val", SqlDbType.VarChar, 100)
             {
                 Value = valueToSearch
             };
-            DataTable table = db.getData("spr_search_Products", parameters);
-            db.closeConnection();
+            DataTable table = db.GetData("spr_search_customer", parameters);
+            db.CloseConnection();
             return table;
         }
-
-        public void DeleteCustomer(int id)
+        public DataTable CheckDup(string valueToSearch)//בדיקת כפילויות
         {
             DB db = new DB();
             SqlParameter[] parameters = new SqlParameter[1];
-
-            parameters[0] = new SqlParameter("@id", SqlDbType.Int)
+            parameters[0] = new SqlParameter("@cust_id", SqlDbType.Int)
             {
-                Value = id
+                Value = valueToSearch
             };
-
-            db.openConnection();
-            db.setData("spr_delete_customer", parameters);
-            db.closeConnection();
-
+            DataTable table = db.GetData("spr_check_customer_dup", parameters);
+            db.CloseConnection();
+            return table;
         }
 
-        public void UpdateCustomer(int id, string fname, string lname, string tel, string email)
-        {
-
-            DB db = new DB();
-            db.openConnection();
-            SqlParameter[] parameters = new SqlParameter[5];
-
-            parameters[0] = new SqlParameter("@id", SqlDbType.Int)
-            {
-                Value = id
-            };
-
-            parameters[1] = new SqlParameter("@fname", SqlDbType.VarChar, 50)
-            {
-                Value = fname
-            };
-
-            parameters[2] = new SqlParameter("@lname", SqlDbType.VarChar, 50)
-            {
-                Value = lname
-            };
-
-            parameters[3] = new SqlParameter("@tel", SqlDbType.NChar, 20)
-            {
-                Value = tel
-            };
-
-            parameters[4] = new SqlParameter("@mail", SqlDbType.VarChar, 50)
-            {
-                Value = email
-            };
-
-            db.setData("spr_update_customer", parameters);
-            db.closeConnection();
-
-        }
 
     }
 }
