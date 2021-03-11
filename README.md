@@ -4,7 +4,7 @@
 2. Add the DB to your SQL Server Managment (Databases--> Attach)
 
 Optional:
-To be able to print eployee shifts and order receipts, Change the lines below to your file location 
+To be able to print eployee shifts and order receipts, change the lines below to your file location 
 
 **ALL FILES LOCATED AT DB+arial.ttf**
 
